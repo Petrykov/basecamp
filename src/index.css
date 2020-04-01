@@ -1,13 +1,92 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.navbar{
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid black;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.btnNav{
+  height: 50px;
+  width: 100px;
+  margin: 20px;
+  font-size: 15px;
+  border: 1px solid  black;
+  cursor: pointer;
+  background: rgb(84, 192, 84);
+  border-radius: 15px;
 }
+
+.btnNav:hover{
+  transform: translateY(-7px);
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+}
+
+.main{
+  width: 100%;
+  margin-top: 20px;
+  height: auto;
+  border: 1px solid purple;
+}
+
+.body{
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+  padding: 1em;
+  margin-top: 20px;
+  display: flex;
+}
+
+.border{
+  border: 1px solid black;
+}
+
+.body h2{
+  text-align: center;
+  vertical-align: middle;
+}
+
+.dronesInfo{
+  width: 50%;
+  height: 500px;
+  background: wheat;
+  display: table-cell;
+  border-radius: 15px;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+} 
+
+.measurementsUL {
+  list-style-type: none;
+  padding: 1em;
+}
+
+.pannel{
+  width: 50%;
+  height: 500px;
+  background: none;
+  border-radius: 15px;
+  border: 1px solid black;
+  text-align:center;
+}
+
+.pannelBtn{
+  height: 50px;
+  width: auto;
+  margin: 20px;
+  font-size: 15px;
+  cursor: pointer;
+  background: rgb(84, 192, 84);
+  border-radius: 15px;
+  border: 1px solid black;
+}
+
+.pannelBtn:hover{
+  transform: translateY(-7px);
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+}
+
+
