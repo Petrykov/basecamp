@@ -12,7 +12,6 @@ class MapJs extends React.Component{
     }
 
      getCoordinates = async () => {
-        console.log('in here');
         await axios.get("http://localhost:3000")
         .then(res => this.setState({ droneCoordinates: res.data}));
 

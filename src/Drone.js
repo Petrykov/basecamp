@@ -11,7 +11,6 @@ class Drone extends React.Component{
     }
 
     getCoordinates = async () => {
-        console.log('in here');
         await axios.get("http://localhost:3000")
         .then(res => this.setState({ droneCoordinates: res.data}));
 
@@ -25,31 +24,29 @@ class Drone extends React.Component{
         return <div>
                     <div className="body">
                         <div className="dronesInfo">
+
+                            <div className="underline"> <h1>Drones measurements</h1></div>
+
                                 <ul className = "measurementsUL">
                                     {this.state.droneCoordinates.length === 0 ? 
-                                    (<h1>Data was not requested yet. Press 'get measurements'</h1>) 
+                                    (<h1 className = "h1Style">Data was not requested yet. Press 'get measurements'</h1>) 
                                     : (
                                             this.state.droneCoordinates.map((e, i) => {
                                             return <h3 key={i} ><li>{"# {"+(i+1)+ "} [" + e.Coordinates+"]"}</li></h3> ;
                                         })
                                     )}
                                 </ul>
-                            
                         </div>
 
-                        <div className="pannel">
-
-                            <div className="pannelBtnDiv">
-                                <button onClick={this.getCoordinates} className="pannelBtn">Get measurements</button>
-                            </div>
-                            
-                            <div className="pannelBtnDiv">
-                                <button className="pannelBtn">Synchronize with drones</button>                            
-                            </div>
-                            
+                        <div className="usePannel">
+                         <h2>Control panel</h2>
+                            <button onClick={this.getCoordinates} className="pannelBtn">Get measurements</button>
+                            <button className="pannelBtn">Synchronize with drones</button>      
                         </div>
 
-                    </div>
+                        
+
+                    </div>                 
                 </div>
     }
 }
