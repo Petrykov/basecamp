@@ -20,7 +20,7 @@ let requestNum =0;
 app.use(cors());
 
 const connection = mysql.createPool({
-    host:'localhost:3306',
+    host:'84.81.136.26',
     user:'monty',
     password:'some_pass',
     database:'KekistanDB'
@@ -29,12 +29,16 @@ const connection = mysql.createPool({
 app.get('/', function (req, res) {
     requestNum++;
     console.log("reqeust #" + requestNum);
-    connection.getConnection(function (err, connection) {
-    connection.query('SELECT * FROM Messages', function (error, results, fields) {
-      if (error) throw error;
-      res.send(results);
+      connection.getConnection(function (err, connection) {
+        if(err) throw err;
+          connection.query('SELECT * FROM Cannon', function (error, results, fields) {
+            if (error){
+              throw error;
+            } else{
+              res.send(results);
+            } 
+      });
     });
-  });
 });
 
 // Starting our server.

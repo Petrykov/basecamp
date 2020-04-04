@@ -1,29 +1,31 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
+import 'regenerator-runtime/runtime';
 import { Map, GoogleApiWrapper } from 'google-maps-react';
 
 class MapJs extends React.Component{
 
-    state = {
-        messages : []
+    constructor(props) {
+        super(props);
+        this.state = { droneCoordinates: []};
     }
 
-    fetchMessages(){
-       console.log('before');
-        axios.get('localhost:3000/',{
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-            },
-            proxy: {
-                host: 'localhost:3306',
-                port: 3306
-            }
-        }) .then(res=>{
-            console.log('status: ' + res.data);
-        });
+    componentDidMount() {
+        // this.getUsers();
+     }
 
-    }
+     getUsers = async () => {
+        console.log('in here');
+        await axios.get("http://localhost:3000")
+        .then(res => this.setState({ droneCoordinates: res.data}));
+        console.log("users size: " + this.state.droneCoordinates.length);
+
+        for(let i=0; i < this.state.droneCoordinates.length; i ++){
+            console.log(this.state.droneCoordinates[i]);
+        }
+
+    };
 
     render(){
         return (
@@ -39,8 +41,17 @@ class MapJs extends React.Component{
                             }}
                         />
                     </div>
+
+                    {this.state.droneCoordinates.length === 0 ? 
+                        (<div>Loading...</div>) 
+                        : (
+                                this.state.droneCoordinates.map((e, i) => {
+                                return <div key={i}>{e.Coordinates}</div>;
+                            })
+                        )}
+
                 </div>
-                <button onClick={this.fetchMessages}>Click me</button>                                  
+                <button onClick={this.getUsers}>reqeust from localhost</button>                                  
             </div>
         );
     }
