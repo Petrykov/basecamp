@@ -40,7 +40,7 @@ class MapJs extends React.Component{
                     {this.state.droneCoordinates.length === 0 ? 
                         (<div>Loading...</div>) 
                         : (
-                                this.state.usersCollection.map((e, i) => {
+                                this.state.droneCoordinates.map((e, i) => {
                                 return <div key={i}>{e.Coordinates}</div>;
                             })
                         )}

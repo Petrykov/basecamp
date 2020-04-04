@@ -63,6 +63,9 @@
 .measurementsUL {
   list-style-type: none;
   padding: 1em;
+  border: 1px solid black;
+  width: 50%;
+  margin: 20px auto;
 }
 
 .pannel{

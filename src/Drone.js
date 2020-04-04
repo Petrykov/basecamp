@@ -21,17 +21,16 @@ class Drone extends React.Component{
 
     };
 
-
     render(){
         return <div>
                     <div className="body">
                         <div className="dronesInfo">
                                 <ul className = "measurementsUL">
                                     {this.state.droneCoordinates.length === 0 ? 
-                                    (<div>Loading...</div>) 
+                                    (<h1>Data was not requested yet. Press 'get measurements'</h1>) 
                                     : (
                                             this.state.droneCoordinates.map((e, i) => {
-                                            return <h3><li key={i}>{"# {"+i+ "} [" + e.Coordinates+"]"}</li></h3> ;
+                                            return <h3 key={i} ><li>{"# {"+(i+1)+ "} [" + e.Coordinates+"]"}</li></h3> ;
                                         })
                                     )}
                                 </ul>
