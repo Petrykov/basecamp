@@ -11,15 +11,10 @@ class MapJs extends React.Component{
         this.state = { droneCoordinates: []};
     }
 
-    componentDidMount() {
-        // this.getUsers();
-     }
-
-     getUsers = async () => {
+     getCoordinates = async () => {
         console.log('in here');
         await axios.get("http://localhost:3000")
         .then(res => this.setState({ droneCoordinates: res.data}));
-        console.log("users size: " + this.state.droneCoordinates.length);
 
         for(let i=0; i < this.state.droneCoordinates.length; i ++){
             console.log(this.state.droneCoordinates[i]);
@@ -45,13 +40,13 @@ class MapJs extends React.Component{
                     {this.state.droneCoordinates.length === 0 ? 
                         (<div>Loading...</div>) 
                         : (
-                                this.state.droneCoordinates.map((e, i) => {
+                                this.state.usersCollection.map((e, i) => {
                                 return <div key={i}>{e.Coordinates}</div>;
                             })
                         )}
 
                 </div>
-                <button onClick={this.getUsers}>reqeust from localhost</button>                                  
+                <button onClick={this.getCoordinates}>reqeust from localhost</button>                                  
             </div>
         );
     }
