@@ -9,67 +9,58 @@ import { Map, GoogleApiWrapper,withScriptjs,
   InfoWindow } from 'google-maps-react';
 
 import MarkersOnMap from 'markers-on-map-react';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 class MapJs extends React.Component{
 
     constructor(props) {
         super(props);
-        this.state = { droneCoordinates: []};
+        this.state = { droneCoordinates: [], markerObjectsState:[]};
     }
 
      getCoordinates = async () => {
-        await axios.get("http://localhost:3000")
-        .then(res => this.setState({ droneCoordinates: res.data}));
+         this.setState({droneCoordinates: null});
+        await axios.get("http://localhost:3000/cannon")
+        .then(res =>this.setState({ droneCoordinates: res.data}));
 
         for(let i=0; i < this.state.droneCoordinates.length; i ++){
-            console.log(this.state.droneCoordinates[i]);
+            console.log("rsp: " + this.state.droneCoordinates[i]);
         }
-
+    
+        this.uplaodMap();
     };
 
-    componentDidMount() {
- 
-        // Basic initialize
-        MarkersOnMap.Init({
-     
-          googleApiKey: "AIzaSyBIbuhocBx01xskbWQo8hceOuuwHW9Tj80",
-     
-          markerObjects: [
-            {
-              markerLat: 52.266075, // marker latitude as number
-              markerLong: 6.155216, // marker longitude as number
-            },
+    uplaodMap() {
 
-            {
-                markerLat: 52.266075, // marker latitude as number
-                markerLong: 6.222750, // marker longitude as number
-              },
-          ],
+        for(let i =0; i < this.state.droneCoordinates.length; i ++){
+
+            let coordinates = {
+                markerLat: this.state.droneCoordinates[i].latitude,
+                markerLong: this.state.droneCoordinates[i].longitude
+            };
+
+            this.state.markerObjectsState.push(coordinates);
+        }
+
+        MarkersOnMap.Init({
+          googleApiKey: "AIzaSyBIbuhocBx01xskbWQo8hceOuuwHW9Tj80",
+          
+          markerObjects: this.state.markerObjectsState
+          
         });
-     
-        // Select map element (ID or Class)
+
         MarkersOnMap.Run('div#GoogleMap');
-     
       }
 
     render(){
         return (
-            <div>
-                <div className="body border">
+            <div className = "test">
+                <div className="body">
                     <div className = "googleMap">
-                    <div id="GoogleMap"></div>
-                    </div>
-
-                    {this.state.droneCoordinates.length === 0 ? 
-                        (<div>Loading...</div>) 
-                        : (
-                                this.state.droneCoordinates.map((e, i) => {
-                                return <div key={i}>{e.Coordinates}</div>;
-                            })
-                        )}
-
+                        <div id="GoogleMap"></div>
+                    </div>       
                 </div>
-                <button onClick={this.getCoordinates}>reqeust from localhost</button>                                  
+                <button className = "pannelBtn requestDronesMap" onClick={this.getCoordinates}>Get drones</button>                                
             </div>
         );
     }

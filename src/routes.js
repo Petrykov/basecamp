@@ -26,21 +26,89 @@ const connection = mysql.createPool({
     database:'KekistanDB'
   });
 
-app.get('/', function (req, res) {
-    requestNum++;
-    console.log("reqeust #" + requestNum);
-      connection.getConnection(function (err, connection) {
-        if(err) throw err;
-          connection.query('SELECT * FROM Cannon', function (error, results, fields) {
-            if (error){
-              throw error;
-            } else{
-              console.log('success');
-              res.send(results);
-            } 
-      });
+app.get('/cannon', function (req, res) {
+  requestNum++;
+  console.log("reqeust #" + requestNum);
+    connection.getConnection(function (err, connection) {
+      
+      if(err) throw err;
+
+        connection.query('SELECT * FROM Cannon', function (error, results, fields) {
+          if (error){
+            throw error;
+          } else{
+            console.log('success');
+            res.send(results);
+          } 
     });
+
+  });
 });
+
+app.get('/item', function (req, res) {
+  requestNum++;
+  console.log("reqeust #" + requestNum);
+    connection.getConnection(function (err, connection) {
+      if(err) throw err;
+        connection.query('SELECT * FROM Item', function (error, results, fields) {
+          if (error){
+            throw error;
+          } else{
+            console.log('success');
+            res.send(results);
+          } 
+    });
+  });
+});
+
+app.get('/pedestrian', function (req, res) {
+  requestNum++;
+  console.log("reqeust #" + requestNum);
+    connection.getConnection(function (err, connection) {
+      if(err) throw err;
+        connection.query('SELECT * FROM Pedestrian', function (error, results, fields) {
+          if (error){
+            throw error;
+          } else{
+            console.log('success');
+            res.send(results);
+          } 
+    });
+  });
+});
+
+app.get('/ray', function (req, res) {
+  requestNum++;
+  console.log("reqeust #" + requestNum);
+    connection.getConnection(function (err, connection) {
+      if(err) throw err;
+        connection.query('SELECT * FROM Ray', function (error, results, fields) {
+          if (error){
+            throw error;
+          } else{
+            console.log('success');
+            res.send(results);
+          } 
+    });
+  });
+});
+
+app.get('/wagon', function (req, res) {
+  requestNum++;
+  console.log("reqeust #" + requestNum);
+    connection.getConnection(function (err, connection) {
+      if(err) throw err;
+        connection.query('SELECT * FROM Wagon', function (error, results, fields) {
+          if (error){
+            throw error;
+          } else{
+            console.log('success');
+            res.send(results);
+          } 
+    });
+  });
+});
+
 
 // Starting our server.
 app.listen(3000, () => {
