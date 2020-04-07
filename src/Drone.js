@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import axios from 'axios';
 import 'regenerator-runtime/runtime';
+var net = require('net');
 
 class Drone extends React.Component{
 
@@ -43,6 +44,12 @@ class Drone extends React.Component{
         .then(res => this.setState({ droneWagonCoordinates: res.data}));
     };
 
+    syncWithDrone(){
+        var client = net.connect(6969, 'localhost');    
+        client.write('Test message from node js to java application');
+        client.end();
+    }
+
     render(){
         return <div>
                     <div className="body">
@@ -64,7 +71,7 @@ class Drone extends React.Component{
                         <div className="usePannel">
                          <h2>Control panel</h2>
                             <button onClick={this.getCannonCoordinates} className="pannelBtn">Get measurements</button>
-                            <button className="pannelBtn">Synchronize with drones</button>      
+                            <button onClick={this.syncWithDrone} className="pannelBtn">Synchronize with drones</button>      
                         </div>
 
                         <div className="separator"/>
