@@ -35,6 +35,7 @@ app.get('/', function (req, res) {
             if (error){
               throw error;
             } else{
+              console.log('success');
               res.send(results);
             } 
       });
